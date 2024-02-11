@@ -1,0 +1,27 @@
+PELICULAS
+
+GET: http://localhost:8080/api/peliculas/getAll
+GET ID: http://localhost:8080/api/peliculas/{id}
+POST: http://localhost:8080/api/peliculas/registrar
+{
+    "name": "Sin Control",
+    "director_movie": "Quentin Tarantino",
+    "duration": 135,
+    "genero": {
+        "id_gen": 4,
+        "name": "Comedia"
+    }
+}
+PUT: http://localhost:8080/api/peliculas/actualizar
+DELETE: http://localhost:8080/api/peliculas/{id}
+
+---------------------------------
+
+GÉNERO
+
+GET: http://localhost:8080/api/generos/getAll
+GET ID: http://localhost:8080/api/generos/{id}
+POST: http://localhost:8080/api/generos/registrar
+{
+    "name": "Aventura"
+}
