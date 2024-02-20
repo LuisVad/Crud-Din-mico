@@ -8,6 +8,7 @@ import utez.edu.mx.movies.entities.Peliculas;
 import utez.edu.mx.movies.utils.CustomResponse;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,7 @@ public class PeliculasServices {
 
     @Transactional(rollbackFor = {SQLException.class})
     public CustomResponse<Peliculas> save(Peliculas pelicula) throws SQLException {
-        if (this.repository.existsByName(pelicula.getName())) {
+        if (this.repository.existsByNombre(pelicula.getNombre())) {
             return new CustomResponse<>(
                     null,
                     false,
@@ -98,6 +99,31 @@ public class PeliculasServices {
                     "Película eliminada correctamente"
             );
         }
+    }
+
+    public CustomResponse<List<Peliculas>> getPeliculasByNombre(String nombre) {
+        List<Peliculas> peliculas = repository.findByNombreContaining(nombre);
+        return new CustomResponse<>(peliculas, false, 200, "Ok");
+    }
+
+    public CustomResponse<List<Peliculas>> getPeliculasByDirector(String director) {
+        List<Peliculas> peliculas = repository.findByDirectorMovieContaining(director);
+        return new CustomResponse<>(peliculas, false, 200, "Ok");
+    }
+
+    public CustomResponse<List<Peliculas>> getPeliculasByFechaPublicacion(Date fechaInicio, Date fechaFin) {
+        List<Peliculas> peliculas = repository.findByFechaPublicacionBetween(fechaInicio, fechaFin);
+        return new CustomResponse<>(peliculas, false, 200, "Ok");
+    }
+
+    public CustomResponse<List<Peliculas>> getPeliculasByGenero(String genero) {
+        List<Peliculas> peliculas = repository.findByGeneroName(genero);
+        return new CustomResponse<>(peliculas, false, 200, "Ok");
+    }
+
+    public CustomResponse<List<Peliculas>> getPeliculasOrderByFechaPublicacionDesc() {
+        List<Peliculas> peliculas = repository.findByOrderByFechaPublicacionDesc();
+        return new CustomResponse<>(peliculas, false, 200, "Ok");
     }
 
 }

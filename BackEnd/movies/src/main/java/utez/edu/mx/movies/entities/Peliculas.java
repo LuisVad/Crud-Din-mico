@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "peliculas")
 @AllArgsConstructor
@@ -18,10 +20,10 @@ public class Peliculas{
     private Long id_movie;
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String nombre;
 
     @Column(nullable = false, length = 100)
-    private String director_movie;
+    private String directorMovie;
 
     @Column(nullable = false)
     private long duration;
@@ -30,4 +32,7 @@ public class Peliculas{
     @JoinColumn(name = "fk_genero")
     private Generos genero;
 
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date fechaPublicacion; // Nuevo campo para la fecha de publicación
 }
