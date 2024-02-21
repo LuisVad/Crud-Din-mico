@@ -33,6 +33,5 @@ public class Peliculas{
     private Generos genero;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     private Date fechaPublicacion; // Nuevo campo para la fecha de publicación
 }

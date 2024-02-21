@@ -59,7 +59,7 @@ public class PeliculasController {
 
     // Método para buscar películas por rango de fechas de publicación
     @GetMapping("/buscarPorFechaPublicacion")
-    public CustomResponse<List<Peliculas>> getPeliculasByFechaPublicacion(@RequestParam Date fechaInicio, @RequestParam Date fechaFin) throws SQLException {
+    public CustomResponse<List<Peliculas>> getPeliculasByFechaPublicacion(@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date fechaInicio, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date fechaFin) throws SQLException {
         return service.findPeliculasByFechaPublicacion(fechaInicio, fechaFin);
     }
 

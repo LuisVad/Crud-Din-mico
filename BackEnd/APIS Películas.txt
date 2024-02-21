@@ -29,20 +29,24 @@ POST: http://localhost:8080/api/generos/registrar
 
 ---------------------------------
 
-QUERIES
+QUERIES (Todos estan con Request Param)
 
 //Consultar películas por nombre
-http://localhost:8080/api/peliculas/nombre/Sin%20Control
+--- Los buscas por "nombre"
+http://localhost:8080/api/peliculas/buscarPorNombre?nombre=Sin Control
 
 //Consultar películas por nombre del director
-http://localhost:8080/api/peliculas/director/Quentin%20Tarantino
+--- Los buscas por "director"
+http://localhost:8080/api/peliculas/buscarPorDirector?director=Frankie Rivers
 
 //Filtrar películas por rango de fechas de publicación
-http://localhost:8080/api/peliculas/fechas?fechaInicio=2024-02-01&fechaFin=2024-02-29
-Poner parametros fechaInicio & fechaFin
+--- Poner parametros fechaInicio & fechaFin (con formato yyyy-MM-dd)
+http://localhost:8080/api/peliculas/buscarPorFechaPublicacion?fechaInicio=2024-02-01&fechaFin=2024-02-29
+
 
 //Consultar películas por género o categoría
-List<Peliculas> findByGeneroName(String genero);
+--- Los buscas por "genero"
+http://localhost:8080/api/peliculas/buscarPorGenero?genero=Terror
 
 //Consultar películas por fecha de publicación de manera descendente
-http://localhost:8080/api/peliculas/fechaPublicacionDesc
+http://localhost:8080/api/peliculas/buscarPorFechaPublicacionDesc
