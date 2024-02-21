@@ -45,29 +45,33 @@ public class PeliculasController {
         return service.delete(id);
     }
 
-    @GetMapping("/nombre/{nombre}")
-    public CustomResponse<List<Peliculas>> getPeliculasByNombre(@PathVariable String nombre) {
-        return service.getPeliculasByNombre(nombre);
+    // Método para buscar películas por nombre
+    @GetMapping("/buscarPorNombre")
+    public CustomResponse<List<Peliculas>> getPeliculasByNombre(@RequestParam String nombre) throws SQLException {
+        return service.findPeliculasByNombre(nombre);
     }
 
-    @GetMapping("/director/{director}")
-    public CustomResponse<List<Peliculas>> getPeliculasByDirector(@PathVariable String director) {
-        return service.getPeliculasByDirector(director);
+    // Método para buscar películas por nombre del director
+    @GetMapping("/buscarPorDirector")
+    public CustomResponse<List<Peliculas>> getPeliculasByDirector(@RequestParam String director) throws SQLException {
+        return service.findPeliculasByDirector(director);
     }
 
-    @GetMapping("/fechas")
-    public CustomResponse<List<Peliculas>> getPeliculasByFechaPublicacion(@RequestParam("fechaInicio") @DateTimeFormat(pattern="yyyy-MM-dd") Date fechaInicio,
-                                                                          @RequestParam("fechaFin") @DateTimeFormat(pattern="yyyy-MM-dd") Date fechaFin) {
-        return service.getPeliculasByFechaPublicacion(fechaInicio, fechaFin);
+    // Método para buscar películas por rango de fechas de publicación
+    @GetMapping("/buscarPorFechaPublicacion")
+    public CustomResponse<List<Peliculas>> getPeliculasByFechaPublicacion(@RequestParam Date fechaInicio, @RequestParam Date fechaFin) throws SQLException {
+        return service.findPeliculasByFechaPublicacion(fechaInicio, fechaFin);
     }
 
-    @GetMapping("/genero/{genero}")
-    public CustomResponse<List<Peliculas>> getPeliculasByGenero(@PathVariable String genero) {
-        return service.getPeliculasByGenero(genero);
+    // Método para buscar películas por género
+    @GetMapping("/buscarPorGenero")
+    public CustomResponse<List<Peliculas>> getPeliculasByGenero(@RequestParam String genero) throws SQLException {
+        return service.findPeliculasByGenero(genero);
     }
 
-    @GetMapping("/fechaPublicacionDesc")
-    public CustomResponse<List<Peliculas>> getPeliculasOrderByFechaPublicacionDesc() {
-        return service.getPeliculasOrderByFechaPublicacionDesc();
+    // Método para buscar películas por fecha de publicación de manera descendente
+    @GetMapping("/buscarPorFechaPublicacionDesc")
+    public CustomResponse<List<Peliculas>> getPeliculasOrderByFechaPublicacionDesc() throws SQLException {
+        return service.findPeliculasOrderByFechaPublicacionDesc();
     }
 }

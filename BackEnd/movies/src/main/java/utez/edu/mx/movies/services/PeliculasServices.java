@@ -101,27 +101,37 @@ public class PeliculasServices {
         }
     }
 
-    public CustomResponse<List<Peliculas>> getPeliculasByNombre(String nombre) {
+    // Método para buscar películas por nombre
+    @Transactional(readOnly = true)
+    public CustomResponse<List<Peliculas>> findPeliculasByNombre(String nombre) throws SQLException {
         List<Peliculas> peliculas = repository.findByNombreContaining(nombre);
         return new CustomResponse<>(peliculas, false, 200, "Ok");
     }
 
-    public CustomResponse<List<Peliculas>> getPeliculasByDirector(String director) {
+    // Método para buscar películas por nombre del director
+    @Transactional(readOnly = true)
+    public CustomResponse<List<Peliculas>> findPeliculasByDirector(String director) throws SQLException {
         List<Peliculas> peliculas = repository.findByDirectorMovieContaining(director);
         return new CustomResponse<>(peliculas, false, 200, "Ok");
     }
 
-    public CustomResponse<List<Peliculas>> getPeliculasByFechaPublicacion(Date fechaInicio, Date fechaFin) {
+    // Método para buscar películas por rango de fechas de publicación
+    @Transactional(readOnly = true)
+    public CustomResponse<List<Peliculas>> findPeliculasByFechaPublicacion(Date fechaInicio, Date fechaFin) throws SQLException {
         List<Peliculas> peliculas = repository.findByFechaPublicacionBetween(fechaInicio, fechaFin);
         return new CustomResponse<>(peliculas, false, 200, "Ok");
     }
 
-    public CustomResponse<List<Peliculas>> getPeliculasByGenero(String genero) {
+    // Método para buscar películas por género
+    @Transactional(readOnly = true)
+    public CustomResponse<List<Peliculas>> findPeliculasByGenero(String genero) throws SQLException {
         List<Peliculas> peliculas = repository.findByGeneroName(genero);
         return new CustomResponse<>(peliculas, false, 200, "Ok");
     }
 
-    public CustomResponse<List<Peliculas>> getPeliculasOrderByFechaPublicacionDesc() {
+    // Método para buscar películas por fecha de publicación de manera descendente
+    @Transactional(readOnly = true)
+    public CustomResponse<List<Peliculas>> findPeliculasOrderByFechaPublicacionDesc() throws SQLException {
         List<Peliculas> peliculas = repository.findByOrderByFechaPublicacionDesc();
         return new CustomResponse<>(peliculas, false, 200, "Ok");
     }
