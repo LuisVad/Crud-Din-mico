@@ -203,6 +203,10 @@
         :title="pelicula.nombre"
         header-tag="header"
         footer-tag="footer"
+        draggable="true"
+        @dragstart="onDragStart(pelicula, index)"
+        @dragover.prevent
+        @drop="onDrop(index)"
         @click="setPelicula(pelicula.id_movie)"
       >
         <b-card-text>Director: {{ pelicula.directorMovie }}</b-card-text>
@@ -260,7 +264,8 @@ export default {
       peliculasel: null,
       show: true,
       showElement: true,
-      lastScrollPosition: 0
+      lastScrollPosition: 0,
+      draggedIndex: null,
     };
   },
   mounted() {
@@ -281,6 +286,17 @@ export default {
 
       this.lastScrollPosition = currentScrollPosition;
       },
+    onDragStart(pelicula, index) {
+      event.dataTransfer.setData('text/plain', index);
+      event.dataTransfer.effectAllowed = 'move';
+      this.draggedItem = { index, pelicula };
+    },
+    onDrop(dropIndex) {
+      const draggedIndex = this.draggedItem.index;
+      const draggedPelicula = this.draggedItem.pelicula;
+      this.peliculas.splice(draggedIndex, 1);
+      this.peliculas.splice(dropIndex, 0, draggedPelicula);
+    },
     setPelicula(ide) {
       this.peliculasel = ide;
     },
