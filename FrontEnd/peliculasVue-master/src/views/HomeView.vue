@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Peliculas</h1>
+    <h1 v-show="showElement">Peliculas</h1>
     <div style="display: grid; place-items: center; gap: 10px">
       <div style="display: flex; flex-direction: row; gap: 10px">
         <div
@@ -259,9 +259,28 @@ export default {
       generos_id: [],
       peliculasel: null,
       show: true,
+      showElement: true,
+      lastScrollPosition: 0
     };
   },
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
+  },
   methods: {
+    onScroll() {
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
+      if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
+        return;
+      }
+
+      this.showElement = currentScrollPosition < this.lastScrollPosition;
+
+      this.lastScrollPosition = currentScrollPosition;
+      },
     setPelicula(ide) {
       this.peliculasel = ide;
     },
